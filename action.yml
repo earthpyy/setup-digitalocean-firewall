@@ -1,0 +1,23 @@
+name: 'Setup DigitalOcean Firewall'
+description: 'Add GitHub shared runner IP into DigitalOcean''s firewall rule'
+inputs:
+  access-token:
+    description: 'DigitalOcean''s personal access token'
+    required: true
+  firewall-id:
+    description: 'Firewall ID'
+    required: true
+  ports:
+    description: 'Ports to allow'
+    required: false
+    default: '22'
+  dry-run:
+    description: 'Dry run'
+    required: false
+    default: 'false'
+outputs:
+  runner-ip:
+    description: 'IP of GitHub shared runner'
+runs:
+  using: 'node16'
+  main: 'index.js'
