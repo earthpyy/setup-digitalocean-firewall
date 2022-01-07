@@ -20,4 +20,4 @@ outputs:
     description: 'IP of GitHub shared runner'
 runs:
   using: 'node16'
-  main: 'index.js'
+  main: 'dist/index.js'
