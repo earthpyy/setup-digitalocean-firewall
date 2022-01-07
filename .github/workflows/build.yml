@@ -1,0 +1,68 @@
+name: build
+
+on:
+  push:
+    tags: [ "v*" ]
+
+jobs:
+  build:
+    if: "!startsWith(github.event.head_commit.message, '[RELEASE] ')"
+    runs-on: ubuntu-latest
+    steps:
+      - id: get-version
+        run: |
+          plain=$(echo ${{ github.ref_name }} | cut -c 2-)
+          echo "::set-output name=plain::$plain"
+          major=$(echo ${{ github.ref_name }} | cut -c -2)
+          echo "::set-output name=major::$major"
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          token: ${{ secrets.GH_PAT }}
+      - name: Move to version branch
+        run: |
+          git checkout -b ${{ steps.get-version.outputs.plain }}
+      - name: Set Git config
+        run: |
+          git config --global user.name 'GitHub Workflow'
+          git config --global user.email '<>'
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build using ncc
+        run: |
+          yarn ncc build index.js --license LICENSE
+      - name: Remove current tag
+        run: |
+      - name: Increase version
+        run: |
+          yarn version --new-version ${{ steps.get-version.outputs.plain }}
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "[RELEASE] ${{ github.ref_name }}"
+      - name: Push to Git
+        run: |
+          git push --set-upstream origin ${{ steps.get-version.outputs.plain }}
+      - name: Show Git graph
+        run: |
+          git log --pretty=oneline --graph --decorate --all
+      - name: Move current tag
+        run: |
+          git tag -d ${{ github.ref_name }}
+          git push --delete origin ${{ github.ref_name }}
+          git tag ${{ github.ref_name }}
+          git push origin ${{ github.ref_name }}
+      - name: Create or move parent tag
+        run: |
+          git tag -d ${{ steps.get-version.outputs.major }} || true
+          git push --delete origin ${{ steps.get-version.outputs.major }} || true
+          git tag ${{ steps.get-version.outputs.major }}
+          git push origin ${{ steps.get-version.outputs.major }}
+      - name: Show Git graph
+        run: |
+          git log --pretty=oneline --graph --decorate --all
