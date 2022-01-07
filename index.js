@@ -61,6 +61,7 @@ async function main() {
   const ports = parsePorts(core.getInput('ports'))
 
   const ip = await getIP()
+  core.info(`Current IP: ${ip}`)
   core.setOutput('runner-ip', ip)
 
   const inboundRules = ports.map((port) => ({
