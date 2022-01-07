@@ -23,8 +23,7 @@ GitHub Action to add GitHub shared runner IP into DigitalOcean's firewall rule
 ```yml
   with:
     ...
-    ports: '22222'
-    protocol: tcp
+    ports: '8888/udp'
 ```
 
 ### Multiple Ports
@@ -32,7 +31,7 @@ GitHub Action to add GitHub shared runner IP into DigitalOcean's firewall rule
 ```yml
   with:
     ...
-    ports: '5432,22222'
+    ports: '22,8888/udp'
 ```
 
 ## Inputs
@@ -41,8 +40,7 @@ GitHub Action to add GitHub shared runner IP into DigitalOcean's firewall rule
 | --- | -------- | ------- | ----------- |
 | `access-token` | Yes | | _DigitalOcean_'s personal access token |
 | `firewall-id` | Yes | | Firewall ID |
-| `ports` | No | `22` | Port(s) to allow |
-| `protocol` | No | `tcp` | Protocol to allow |
+| `ports` | No | `22` | Ports to allow (if no protocol specified, `tcp` is applied) |
 | `dry-run` | No | `false` | Dry run (no firewall change) |
 
 ## Secrets
