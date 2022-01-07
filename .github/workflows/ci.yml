@@ -3,8 +3,14 @@ name: ci
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - index.js
+      - yarn.lock
   pull_request:
     branches: [ "main" ]
+    paths:
+      - index.js
+      - yarn.lock
 
 jobs:
   test:
