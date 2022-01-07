@@ -44,6 +44,7 @@ jobs:
         run: |
           yarn config set version-git-message "[RELEASE] %s"
           yarn version --new-version ${{ steps.get-version.outputs.plain }}
+          git stage .
           git push --set-upstream origin ${{ steps.get-version.outputs.plain }}
       - name: Push new tag
         run: |
