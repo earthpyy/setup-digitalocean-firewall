@@ -4780,7 +4780,9 @@ async function updateFirewallRules(method, rules) {
     inbound_rules: rules,
   }
 
-  core.info(`Rules to ${method}: ${rules}`)
+  core.info(`Rules to ${method}:`)
+  const rulesString = JSON.stringify(rules, null, 2)
+  core.info(rulesString)
 
   if (!dryRun) {
     await axios[httpMethod](`https://api.digitalocean.com/v2/firewalls/${firewallId}/rules`, payload, {
