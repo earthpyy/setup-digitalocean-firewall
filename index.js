@@ -1,6 +1,5 @@
 const axios = require('axios').default
 const core = require('@actions/core')
-const github = require('@actions/github')
 
 ALLOWED_PROTOCOLS = ['tcp', 'udp']
 
@@ -49,6 +48,9 @@ async function updateFirewallRules(method, rules) {
   if (!dryRun) {
     await axios[httpMethod](`https://api.digitalocean.com/v2/firewalls/${firewallId}/rules`, payload, {
       responseType: 'json',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
     })
 
     core.info('Sent')
