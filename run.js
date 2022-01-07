@@ -33,7 +33,7 @@ async function getIP() {
 
 /**
  *
- * @param { 'add' | 'delete' } method Action to do with firewall rules
+ * @param { 'add' | 'remove' } method Action to do with firewall rules
  * @param { { protocol: string, ports: string, sources: { addresses: string[] } } } rules Inbound rules to add/delete
  * @returns
  */
@@ -52,7 +52,7 @@ async function updateFirewallRules(method, rules) {
       responseType: 'json',
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      }
+      },
     })
 
     core.info('Sent')
@@ -61,26 +61,28 @@ async function updateFirewallRules(method, rules) {
   }
 }
 
-async function main() {
-  const ports = parsePorts(core.getInput('ports'))
+/**
+ * Run an action
+ * @param { 'add' | 'remove' } method Action to do with firewall rules
+ */
+module.exports = async function (method) {
+  try {
+    const ports = parsePorts(core.getInput('ports'))
 
-  const ip = await getIP()
-  core.info(`Current IP: ${ip}`)
-  core.setOutput('runner-ip', ip)
+    const ip = await getIP()
+    core.info(`Current IP: ${ip}`)
+    core.setOutput('runner-ip', ip)
 
-  const inboundRules = ports.map((port) => ({
-    protocol: port.split('/')[1],
-    ports: port.split('/')[0],
-    sources: {
-      addresses: [ip],
-    },
-  }))
+    const inboundRules = ports.map((port) => ({
+      protocol: port.split('/')[1],
+      ports: port.split('/')[0],
+      sources: {
+        addresses: [ip],
+      },
+    }))
 
-  await updateFirewallRules('add', inboundRules)
-}
-
-try {
-  main()
-} catch (error) {
-  core.setFailed(error.message)
+    await updateFirewallRules(method, inboundRules)
+  } catch (error) {
+    core.setFailed(error.message)
+  }
 }

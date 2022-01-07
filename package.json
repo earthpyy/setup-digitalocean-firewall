@@ -1,7 +1,6 @@
 {
   "name": "setup-digitalocean-firewall",
   "version": "0.1.0",
-  "main": "main.js",
   "repository": "git@github.com:earthpyy/setup-digitalocean-firewall.git",
   "author": "Preeti Yuankrathok <preetisatit@gmail.com>",
   "license": "GPL-3.0",

@@ -27,7 +27,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build using ncc
         run: |
-          yarn ncc build index.js
+          yarn ncc build main.js -o dist/main
+          yarn ncc build post.js -o dist/post
       - name: Run action
         uses: ./
         with:
