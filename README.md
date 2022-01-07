@@ -1,7 +1,6 @@
 # setup-digitalocean-firewall
 
 ![GitHub](https://img.shields.io/github/license/earthpyy/setup-digitalocean-firewall)
-![GitHub CI Status](https://img.shields.io/github/workflow/status/earthpyy/setup-digitalocean-firewall/ci)
 ![GitHub Build Status](https://img.shields.io/github/workflow/status/earthpyy/setup-digitalocean-firewall/build)
 ![Node Version](https://img.shields.io/badge/node-16-blue)
 

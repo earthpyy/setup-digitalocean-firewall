@@ -1,4 +1,4 @@
-name: build
+name: Build
 
 on:
   push:
@@ -36,8 +36,6 @@ jobs:
       - name: Build using ncc
         run: |
           yarn ncc build index.js --license LICENSE
-      - name: Remove current tag
-        run: |
       - name: Increase version
         run: |
           yarn version --new-version ${{ steps.get-version.outputs.plain }}
