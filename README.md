@@ -23,7 +23,7 @@ GitHub Action to add GitHub shared runner IP into DigitalOcean's firewall rule
 ```yml
   with:
     ...
-    ports: 22222
+    ports: '22222'
     protocol: tcp
 ```
 
@@ -37,13 +37,13 @@ GitHub Action to add GitHub shared runner IP into DigitalOcean's firewall rule
 
 ## Inputs
 
-| Key | Type | Required | Default | Description |
-| --- | ---- | -------- | ------- | ----------- |
-| `access-token` | `string` | Yes | | _DigitalOcean_'s personal access token |
-| `firewall-id` | `string` | Yes | | Firewall ID |
-| `ports` | `number \| string` | No | `22` | Port(s) to allow |
-| `protocol` | `string` | No | `tcp` | Protocol to allow |
-| `dry-run` | `boolean` | No | `false` | Dry run (no firewall change) |
+| Key | Required | Default | Description |
+| --- | -------- | ------- | ----------- |
+| `access-token` | Yes | | _DigitalOcean_'s personal access token |
+| `firewall-id` | Yes | | Firewall ID |
+| `ports` | No | `22` | Port(s) to allow |
+| `protocol` | No | `tcp` | Protocol to allow |
+| `dry-run` | No | `false` | Dry run (no firewall change) |
 
 ## Secrets
 
@@ -53,6 +53,6 @@ GitHub Action to add GitHub shared runner IP into DigitalOcean's firewall rule
 
 ## Outputs
 
-| Key | Type | Example | Description |
-| --- | ---- | ------- | ----------- |
-| `runner-ip` | `string` | `1.2.3.4` | IP of GitHub shared runner |
+| Key | Example | Description |
+| --- | ------- | ----------- |
+| `runner-ip` | `1.2.3.4` | IP of GitHub shared runner |
