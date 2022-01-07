@@ -12,7 +12,7 @@ const dryRun = core.getBooleanInput('dry-run')
  * @param { string } ports Ports as string, separated by comma.
  * @returns { string[] } Ports with protocol
  */
-async function parsePorts(ports) {
+function parsePorts(ports) {
   return ports.split(',').map((port) => {
     if (!port.includes('/')) {
       return `${port}/tcp`
