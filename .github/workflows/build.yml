@@ -18,7 +18,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          fetch-depth: 3
           token: ${{ secrets.GH_PAT }}
       - name: Move to version branch
         run: |
@@ -37,24 +36,17 @@ jobs:
         run: |
           yarn ncc build main.js -o dist/main
           yarn ncc build post.js -o dist/post
-      - name: Increase version
-        run: |
-          yarn version --new-version ${{ steps.get-version.outputs.plain }}
-      - name: Commit and push changes
-        run: |
-          git add .
-          git commit -m "[RELEASE] ${{ github.ref_name }}"
-      - name: Push to Git
-        run: |
-          git push --set-upstream origin ${{ steps.get-version.outputs.plain }}
-      - name: Show Git graph
-        run: |
-          git log --pretty=oneline --graph --decorate --all
-      - name: Move current tag
+      - name: Remove current tag
         run: |
           git tag -d ${{ github.ref_name }}
           git push --delete origin ${{ github.ref_name }}
-          git tag ${{ github.ref_name }}
+      - name: Increase version
+        run: |
+          yarn config set version-git-message "[RELEASE] %s"
+          yarn version --new-version ${{ steps.get-version.outputs.plain }}
+          git push --set-upstream origin ${{ steps.get-version.outputs.plain }}
+      - name: Push new tag
+        run: |
           git push origin ${{ github.ref_name }}
       - name: Create or move parent tag
         run: |
@@ -62,6 +54,3 @@ jobs:
           git push --delete origin ${{ steps.get-version.outputs.major }} || true
           git tag ${{ steps.get-version.outputs.major }}
           git push origin ${{ steps.get-version.outputs.major }}
-      - name: Show Git graph
-        run: |
-          git log --pretty=oneline --graph --decorate --all
