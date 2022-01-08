@@ -39,7 +39,7 @@ async function getIP() {
  */
 async function updateFirewallRules(method, rules) {
   const httpMethod = method === 'add' ? 'post' : 'delete'
-  const payload = {
+  const data = {
     inbound_rules: rules,
   }
 
@@ -48,11 +48,14 @@ async function updateFirewallRules(method, rules) {
   core.info(rulesString)
 
   if (!dryRun) {
-    await axios[httpMethod](`https://api.digitalocean.com/v2/firewalls/${firewallId}/rules`, payload, {
-      responseType: 'json',
+    await axios({
+      method: httpMethod,
+      url: `https://api.digitalocean.com/v2/firewalls/${firewallId}/rules`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      data,
+      responseType: 'json',
     })
 
     core.info('Sent')
