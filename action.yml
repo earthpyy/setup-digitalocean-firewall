@@ -22,4 +22,3 @@ runs:
   using: 'node16'
   main: 'dist/main/index.js'
   post: 'dist/post/index.js'
-  post-if: 'success()'
