@@ -12,7 +12,7 @@ GitHub Action to add GitHub shared runner IP into DigitalOcean's firewall rule
 
 ```yml
 - name: Setup DigitalOcean firewall
-  uses: earthpyy/setup-digitalocean-firewall@main
+  uses: earthpyy/setup-digitalocean-firewall@v1
   with:
     access-token: ${{ secrets.DO_ACCESS_TOKEN }}
     firewall-id: eb64eefd-f935-4d75-b0a4-97e3d1dbec87

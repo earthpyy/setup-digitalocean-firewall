@@ -1,5 +1,9 @@
 name: 'Setup DigitalOcean Firewall'
 description: 'Add GitHub shared runner IP into DigitalOcean''s firewall rule'
+branding:
+  icon: filter
+  color: blue
+
 inputs:
   access-token:
     description: 'DigitalOcean''s personal access token'
