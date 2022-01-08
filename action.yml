@@ -1,5 +1,5 @@
 name: 'Setup DigitalOcean Firewall'
-description: 'Add GitHub shared runner IP into DigitalOcean''s firewall rule'
+description: 'Temporary add GitHub shared runner IP into DigitalOcean''s firewall rule'
 branding:
   icon: filter
   color: blue

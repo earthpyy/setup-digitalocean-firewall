@@ -4,7 +4,7 @@
 ![GitHub Build Status](https://img.shields.io/github/workflow/status/earthpyy/setup-digitalocean-firewall/build)
 ![Node Version](https://img.shields.io/badge/node-16-blue)
 
-GitHub Action to add GitHub shared runner IP into DigitalOcean's firewall rule
+GitHub Action to temporary add GitHub shared runner IP into DigitalOcean's firewall rule
 
 ## Examples
 
