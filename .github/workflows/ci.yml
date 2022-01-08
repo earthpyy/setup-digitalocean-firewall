@@ -4,12 +4,16 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - *.js
+      - main.js
+      - post.js
+      - run.js
       - yarn.lock
   pull_request:
     branches: [ "main" ]
     paths:
-      - *.js
+      - main.js
+      - post.js
+      - run.js
       - yarn.lock
 
 jobs:
