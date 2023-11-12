@@ -16,7 +16,7 @@ jobs:
           major=$(echo ${{ github.ref_name }} | cut -c -2)
           echo "::set-output name=major::$major"
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_PAT }}
       - name: Move to version branch
@@ -26,7 +26,7 @@ jobs:
         run: |
           git config --global user.name 'GitHub Workflow'
           git config --global user.email '<>'
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'yarn'
