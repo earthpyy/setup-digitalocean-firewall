@@ -17,8 +17,6 @@ jobs:
           echo "::set-output name=major::$major"
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GH_PAT }}
       - name: Move to version branch
         run: |
           git checkout -b ${{ steps.get-version.outputs.plain }}
