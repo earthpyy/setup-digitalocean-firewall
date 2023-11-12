@@ -1,7 +1,7 @@
 # setup-digitalocean-firewall
 
 ![GitHub](https://img.shields.io/github/license/earthpyy/setup-digitalocean-firewall)
-![GitHub Build Status](https://img.shields.io/github/workflow/status/earthpyy/setup-digitalocean-firewall/build)
+![GitHub CI Status](https://img.shields.io/github/actions/workflow/status/earthpyy/setup-digitalocean-firewall/ci.yml?branch=main)
 ![Node Version](https://img.shields.io/badge/node-16-blue)
 
 GitHub Action to temporary add GitHub shared runner IP into DigitalOcean's firewall rule
